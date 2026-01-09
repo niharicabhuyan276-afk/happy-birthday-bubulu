@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Bubulu 💖</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins&display=swap');
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(135deg,#ff9a9e,#fad0c4,#fbc2eb);
+  overflow-x:hidden;
+}
+section{
+  min-height:100vh;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
+  padding:30px;
+}
+section.active{display:flex;}
+h1,h2{font-family:'Dancing Script',cursive;color:#b30059;}
+.card{
+  background:rgba(255,255,255,0.85);
+  border-radius:25px;
+  padding:30px;
+  max-width:800px;
+  box-shadow:0 15px 35px rgba(0,0,0,0.25);
+}
+.btn{
+  margin-top:25px;
+  padding:12px 28px;
+  border:none;
+  border-radius:30px;
+  background:#ff4d88;
+  color:white;
+  font-size:18px;
+  cursor:pointer;
+}
+.countdown{font-size:100px;animation:pulse 1s infinite alternate;}
+@keyframes pulse{from{transform:scale(1);}to{transform:scale(1.2);}}
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:15px;
+}
+.gallery img{
+  width:100%;
+  border-radius:20px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.3);
+}
+.float{
+  position:fixed;
+  bottom:-20px;
+  font-size:24px;
+  animation:floatUp 6s linear infinite;
+}
+@keyframes floatUp{from{transform:translateY(0);opacity:1;}to{transform:translateY(-120vh);opacity:0;}}
+.type{border-right:2px solid #b30059;white-space:nowrap;overflow:hidden;}
+@keyframes fireworks{0%{transform:scale(0);opacity:1;}80%{transform:scale(1.4);opacity:1;}100%{opacity:0;}}
+.firework{position:fixed;font-size:40px;animation:fireworks 1.5s ease-out forwards;}
+</style>
+</head>
+<body>
+
+<!-- PASSWORD PAGE -->
+<section class="active">
+  <div class="card">
+    <h1>🔐 Secret Love Entry 💖</h1>
+    <p>Password hint: What does Shubulu call you? 🥹</p>
+    <input type="password" id="pwd" placeholder="Enter password" style="padding:10px;border-radius:10px;border:1px solid #ccc;">
+    <br><br>
+    <button class="btn" onclick="checkPwd()">Unlock 💌</button>
+  </div>
+</section>
+
+<!-- COUNTDOWN -->
+<section>
+  <h1>🎉 Birthday Countdown Bubulu 🎉</h1>
+  <div class="countdown" id="count">10</div>
+  <button class="btn" onclick="nextPage()">Start 💖</button>
+</section>
+
+<!-- LOVE LETTER -->
+<section>
+  <div class="card">
+    <h2>💌 A Letter From Shubulu 💌</h2>
+    <p id="typeText" class="type"></p>
+  </div>
+  <button class="btn" onclick="nextPage()">Next 🐰</button>
+</section>
+
+<!-- WHY I LOVE YOU -->
+<section>
+  <div class="card">
+    <h2>🌹 Why You Are My Forever 🌹</h2>
+    <p>You are my safe place 🫶, my calm and my chaos 💞, my biggest strength 💪 and my softest comfort 🧸. With you, love feels easy, warm and magical ✨🐰</p>
+  </div>
+  <button class="btn" onclick="nextPage()">Next 📸</button>
+</section>
+
+<!-- GALLERY -->
+<section>
+  <div class="card">
+    <h2>📸 Our Memories 💖</h2>
+    <div class="gallery">
+      <img src="images/photo1.jpg">
+      <img src="images/photo2.jpg">
+      <img src="images/photo3.jpg">
+      <img src="images/photo4.jpg">
+    </div>
+  </div>
+  <button class="btn" onclick="nextPage()">Next 🎶</button>
+</section>
+
+
+
+<!-- MUSIC -->
+<section>
+  <div class="card">
+    <h2>🎶 A Soft Love Melody 🎶</h2>
+    <p>This music is just to set the mood 💖<br>Close your eyes and feel us 🥹✨</p>
+    <audio controls autoplay loop>
+      <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7c8b1a6a3f.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+    <p style="font-size:14px;opacity:0.8;">(If it doesn’t auto-play, just tap ▶️)</p>
+  </div>
+  <button class="btn" onclick="nextPage()">Final 💍</button>
+</section>
+
+<!-- FINAL -->
+<section>
+  <div class="card">
+    <h2>🎂 Happy Birthday My Gentleman 🎂</h2>
+    <p>Hey gentleman, please be mine forever and ever so that I can be the most excited one in your birthdays for life 🎉🥳🥹💌</p>
+    <h3>Forever yours,<br>Niharica 💝 (Your Shubulu)</h3>
+  </div>
+</section>
+
+<script>
+let page=0;const sections=document.querySelectorAll('section');
+function nextPage(){sections[page].classList.remove('active');page++;sections[page].classList.add('active');}
+function checkPwd(){if(document.getElementById('pwd').value.toLowerCase()==='bubulu'){nextPage();}else{alert('Wrong password 😝');}}
+let c=10;setInterval(()=>{if(c>1){c--;count.innerText=c;}else{count.innerText='🎂';}},900);
+const text="My dearest Bubulu… From the day you entered my life, everything felt warmer, safer and happier. Loving you is my favorite feeling. Happy Birthday my forever 🥹💖";
+let i=0;setInterval(()=>{if(i<text.length){typeText.innerText+=text.charAt(i);i++;}},80);
+setInterval(()=>{const f=document.createElement('div');f.className='float';f.innerText=['💖','🌸','🧸','🐰','🎂'][Math.floor(Math.random()*5)];f.style.left=Math.random()*100+'vw';document.body.appendChild(f);setTimeout(()=>f.remove(),6000);},400);
+function fireworks(){for(let i=0;i<18;i++){const f=document.createElement('div');f.className='firework';f.innerText=['🎆','✨','💖','🎇'][Math.floor(Math.random()*4)];f.style.left=Math.random()*100+'vw';f.style.top=Math.random()*100+'vh';document.body.appendChild(f);setTimeout(()=>f.remove(),1500);}}
+const lastSection=sections[sections.length-1];lastSection.addEventListener('click',fireworks);
+</script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Bubulu 💖</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins&display=swap');
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(135deg,#ff9a9e,#fad0c4,#fbc2eb);
+  overflow-x:hidden;
+}
+section{
+  min-height:100vh;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
+  padding:30px;
+}
+section.active{display:flex;}
+h1,h2{font-family:'Dancing Script',cursive;color:#b30059;}
+.card{
+  background:rgba(255,255,255,0.85);
+  border-radius:25px;
+  padding:30px;
+  max-width:800px;
+  box-shadow:0 15px 35px rgba(0,0,0,0.25);
+}
+.btn{
+  margin-top:25px;
+  padding:12px 28px;
+  border:none;
+  border-radius:30px;
+  background:#ff4d88;
+  color:white;
+  font-size:18px;
+  cursor:pointer;
+}
+.countdown{font-size:100px;animation:pulse 1s infinite alternate;}
+@keyframes pulse{from{transform:scale(1);}to{transform:scale(1.2);}}
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:15px;
+}
+.gallery img{
+  width:100%;
+  border-radius:20px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.3);
+}
+.float{
+  position:fixed;
+  bottom:-20px;
+  font-size:24px;
+  animation:floatUp 6s linear infinite;
+}
+@keyframes floatUp{from{transform:translateY(0);opacity:1;}to{transform:translateY(-120vh);opacity:0;}}
+.type{border-right:2px solid #b30059;white-space:nowrap;overflow:hidden;}
+@keyframes fireworks{0%{transform:scale(0);opacity:1;}80%{transform:scale(1.4);opacity:1;}100%{opacity:0;}}
+.firework{position:fixed;font-size:40px;animation:fireworks 1.5s ease-out forwards;}
+</style>
+</head>
+<body>
+
+<!-- PASSWORD PAGE -->
+<section class="active">
+  <div class="card">
+    <h1>🔐 Secret Love Entry 💖</h1>
+    <p>Password hint: What does Shubulu call you? 🥹</p>
+    <input type="password" id="pwd" placeholder="Enter password" style="padding:10px;border-radius:10px;border:1px solid #ccc;">
+    <br><br>
+    <button class="btn" onclick="checkPwd()">Unlock 💌</button>
+  </div>
+</section>
+
+<!-- COUNTDOWN -->
+<section>
+  <h1>🎉 Birthday Countdown Bubulu 🎉</h1>
+  <div class="countdown" id="count">10</div>
+  <button class="btn" onclick="nextPage()">Start 💖</button>
+</section>
+
+<!-- LOVE LETTER -->
+<section>
+  <div class="card">
+    <h2>💌 A Letter From Shubulu 💌</h2>
+    <p id="typeText" class="type"></p>
+  </div>
+  <button class="btn" onclick="nextPage()">Next 🐰</button>
+</section>
+
+<!-- WHY I LOVE YOU -->
+<section>
+  <div class="card">
+    <h2>🌹 Why You Are My Forever 🌹</h2>
+    <p>You are my safe place 🫶, my calm and my chaos 💞, my biggest strength 💪 and my softest comfort 🧸. With you, love feels easy, warm and magical ✨🐰</p>
+  </div>
+  <button class="btn" onclick="nextPage()">Next 📸</button>
+</section>
+
+<!-- GALLERY -->
+<section>
+  <div class="card">
+    <h2>📸 Our Memories 💖</h2>
+    <div class="gallery">
+      <img src="images/photo1.jpg">
+      <img src="images/photo2.jpg">
+      <img src="images/photo3.jpg">
+      <img src="images/photo4.jpg">
+    </div>
+  </div>
+  <button class="btn" onclick="nextPage()">Next 🎶</button>
+</section>
+
+
+
+<!-- MUSIC -->
+<section>
+  <div class="card">
+    <h2>🎶 A Soft Love Melody 🎶</h2>
+    <p>This music is just to set the mood 💖<br>Close your eyes and feel us 🥹✨</p>
+    <audio controls autoplay loop>
+      <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7c8b1a6a3f.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+    <p style="font-size:14px;opacity:0.8;">(If it doesn’t auto-play, just tap ▶️)</p>
+  </div>
+  <button class="btn" onclick="nextPage()">Final 💍</button>
+</section>
+
+<!-- FINAL -->
+<section>
+  <div class="card">
+    <h2>🎂 Happy Birthday My Gentleman 🎂</h2>
+    <p>Hey gentleman, please be mine forever and ever so that I can be the most excited one in your birthdays for life 🎉🥳🥹💌</p>
+    <h3>Forever yours,<br>Niharica 💝 (Your Shubulu)</h3>
+  </div>
+</section>
+
+<script>
+let page=0;const sections=document.querySelectorAll('section');
+function nextPage(){sections[page].classList.remove('active');page++;sections[page].classList.add('active');}
+function checkPwd(){if(document.getElementById('pwd').value.toLowerCase()==='bubulu'){nextPage();}else{alert('Wrong password 😝');}}
+let c=10;setInterval(()=>{if(c>1){c--;count.innerText=c;}else{count.innerText='🎂';}},900);
+const text="My dearest Bubulu… From the day you entered my life, everything felt warmer, safer and happier. Loving you is my favorite feeling. Happy Birthday my forever 🥹💖";
+let i=0;setInterval(()=>{if(i<text.length){typeText.innerText+=text.charAt(i);i++;}},80);
+setInterval(()=>{const f=document.createElement('div');f.className='float';f.innerText=['💖','🌸','🧸','🐰','🎂'][Math.floor(Math.random()*5)];f.style.left=Math.random()*100+'vw';document.body.appendChild(f);setTimeout(()=>f.remove(),6000);},400);
+function fireworks(){for(let i=0;i<18;i++){const f=document.createElement('div');f.className='firework';f.innerText=['🎆','✨','💖','🎇'][Math.floor(Math.random()*4)];f.style.left=Math.random()*100+'vw';f.style.top=Math.random()*100+'vh';document.body.appendChild(f);setTimeout(()=>f.remove(),1500);}}
+const lastSection=sections[sections.length-1];lastSection.addEventListener('click',fireworks);
+</script>
+</body>
+</html>
